@@ -63,11 +63,11 @@ python manage.py runserver
 
 🛡️ Permissions<br>
   .🧑 Guests:<br>
-       => View topics, rooms, and messages
+       => View topics, rooms, and messages  
   .✅ Logged-in Users:<br>
-       => Create rooms, post messages
-       => Edit their own rooms
-       => Delete their own messages
+       => Create rooms, post messages  
+       => Edit their own rooms  
+       => Delete their own messages  
 
 📌 Tech Stack<br>
   => Backend: Django 5+, Django REST Framework
