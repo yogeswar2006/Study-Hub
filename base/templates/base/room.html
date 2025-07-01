@@ -1,0 +1,146 @@
+{% extends 'main.html' %} {% block content %}
+
+<style>
+  .room-container {
+    display: flex;
+    justify-content: center;
+
+    vertical-align: top;
+  }
+  .conversation-section {
+    color: white;
+    border-radius: 15px;
+    padding: 10px;
+    max-height: 550px;
+  }
+  #chat {
+    max-height: 400px;
+    overflow: scroll;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+    margin: 0px;
+  }
+  .comments {
+    height: 460px;
+    font-family: Arial, sans-serif;
+    width: auto;
+  }
+  #input-msg {
+    padding: 5px;
+    border-radius: 5px;
+    min-width: 500px;
+    border: 1px solid black;
+  }
+  #msg-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .participants {
+    color: white;
+    border-radius: 15px;
+    padding: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-family: Arial, sans-serif;
+  }
+  .room-chat {
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+    background-color: #6a1e55;
+  }
+  .comments h1 {
+    margin: 0px;
+  }
+  #room-heading {
+    padding: 10px 10px 5px 10px;
+    border-radius: 10px;
+    background-color: #1a1a1d;
+  }
+  #p {
+    background-color: #1a1a1d;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 5px;
+  }
+  #p-count {
+    background-color: #6a1e55;
+    padding: 3px 5px 3px 5px;
+    border-radius: 3px;
+  }
+  #room-created-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  #delete {
+    text-decoration: none;
+    padding: 5px;
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+  }
+  .nav-section {
+    font-family: Arial, sans-serif;
+  }
+</style>
+
+<div class="room-container">
+  <div class="conversation-section">
+    <div class="comments">
+      <div id="room-heading">
+        <h1>{{room.name}}</h1>
+        <h4>About:</h4>
+        <p>{{room.description}}</p>
+      </div>
+      <hr />
+      <div id="chat">
+        {% for message in room_messages %}
+        <div class="room-chat">
+          <div id="room-created-info">
+            <small>@{{message.user}} </small>
+            <span>{{message.created|timesince }} ago</span>
+            {% if request.user == message.user %}
+            <a href="{% url 'delete-message' message.id %}" id="delete"
+              >Delete</a
+            >
+            {% endif %}
+          </div>
+
+          <p>{{message.body}}</p>
+        </div>
+        {% endfor %}
+      </div>
+      <hr />
+
+      {% if request.user.is_authenticated %}
+      <div class="comment-form">
+        <form method="POST" action="" id="msg-form">
+          {% csrf_token %} <input type="text" name="body" placeholder="Write
+          your messages here..."/ id="input-msg">
+        </form>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="participants">
+    <h4 id="p">
+      Participants <span id="p-count">{{participants.count}}</span>
+    </h4>
+    <hr />
+    {% for user in participants %}
+    <div>
+      <p>@{{user.username}}</p>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,169 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+
+<style>
+  #login-form,
+  #register-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .login-inner-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 1px 1px 0.71px rgba(255, 255, 255, 0.537);
+    font-family: Arial, sans-serif;
+    background-color: #1a1a1d;
+    color: white;
+  }
+  #register-inner-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 1px 1px 0.71px rgba(255, 255, 255, 0.537);
+    font-family: Arial, sans-serif;
+    background-color: #1a1a1d;
+    color: white;
+  }
+  #username,
+  #password {
+    margin-bottom: 15px;
+    padding: 5px;
+  }
+  #login-btn {
+    margin-top: 10px;
+    padding: 5px;
+    font-weight: bold;
+    font-size: 15px;
+    background-color: rgb(3, 240, 248);
+    border: none;
+    border-radius: 5px;
+  }
+  #login-sign-up-btn {
+    color: rgba(255, 255, 255, 0.504);
+    font-size: 16px;
+  }
+  #Username label,
+  #Password label {
+    margin: 20px;
+  }
+  #back-arrow {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+  }
+  .login-register-header {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 10px;
+  }
+  .login-register-header a {
+    margin: 0px;
+    padding: 0px;
+  }
+  #register-detail {
+    margin: 10px;
+  }
+  #id_username,
+  #id_password1,
+  #id_password2 {
+    width: 300px;
+    height: 30px;
+    border-radius: 5px;
+    margin-top: 5px;
+    font-size: 19px;
+  }
+  #register-btn,
+  #login-btn {
+    font-size: 18px;
+    padding: 5px;
+    border-radius: 5px;
+    margin-top: 10px;
+    background-color: rgb(3, 240, 248);
+  }
+  #username input,
+  #password input {
+    width: 300px;
+    height: 30px;
+    border-radius: 5px;
+    margin-top: 5px;
+    font-size: 19px;
+  }
+</style>
+
+{% if page == 'login' %}
+<div>
+  <form method="POST" action="" id="login-form">
+    {% csrf_token %}
+    <div class="login-inner-div">
+      <div class="login-register-header">
+        <a href="{% url 'home' %}"
+          ><img src="{% static 'images/back-arrow2.jpg' %}" id="back-arrow"
+        /></a>
+        <h1>Login</h1>
+      </div>
+      <div id="username">
+        <label><b>Username:</b></label
+        ><br />
+        <input type="text" name="username" placeholder="Enter Username" />
+      </div>
+
+      <div id="password">
+        <label><b>Password:</b></label
+        ><br />
+        <input type="password" name="password" placeholder="Enter Password" />
+      </div>
+      <input type="submit" value="Login" id="login-btn" />
+      <p>Haven't signed up yet?</p>
+      <a href="{% url 'register' %}" id="login-sign-up-btn">Sign up</a>
+    </div>
+  </form>
+</div>
+{% else %}
+<div>
+  <form method="POST" action="" id="register-form">
+    {% csrf_token %}
+    <div id="register-inner-div">
+      <!-- {{form.as_p}} -->
+      <div class="login-register-header">
+        <a href="{% url 'login' %}"
+          ><img src="{% static 'images/back-arrow2.jpg' %}" id="back-arrow"
+        /></a>
+        <h2>Register</h2>
+      </div>
+      <!-- {% for field in form %}
+        <div>
+            <label >{{field.label}}<label>
+            {{field}}
+        </div>
+  {% endfor %} -->
+      <div id="register-detail">
+        <label>Username:</label><br />
+        {{form.username}}
+      </div>
+
+      <div id="register-detail">
+        <label>Password:</label><br />
+        {{form.password1}}
+      </div>
+
+      <div id="register-detail">
+        <label>Password conformation:</label><br />
+        {{form.password2}}
+      </div>
+
+      <input type="submit" value="Register" id="register-btn" />
+      <p>Already signed up?</p>
+      <a href="{% url 'login' %}" id="login-sign-up-btn">Login</a>
+    </div>
+  </form>
+</div>
+{% endif %} {% endblock content %}

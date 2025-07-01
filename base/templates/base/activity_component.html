@@ -1,0 +1,84 @@
+{% block content %}
+
+<style>
+  .activity-box {
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: #9b3922;
+    color: white;
+  }
+  #recent-header {
+    text-align: center;
+    background-color: #1a1a1d;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+  }
+  .recent-activities {
+    padding: 5px;
+    max-height: 580px;
+    overflow: scroll;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+  }
+
+  #recent-msg {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 3px;
+    background-color: #481e14;
+    color: white;
+    margin: 3px;
+  }
+  #user-name {
+    color: white;
+    text-align: start;
+  }
+  #activity {
+    padding: 0px 10px 10px 10px;
+  }
+  #delete {
+    text-decoration: none;
+    padding: 2px;
+    background-color: rgb(0, 208, 255);
+    color: rgb(0, 0, 0);
+    border-radius: 5px;
+    font-size: 15px;
+  }
+  #delete-div {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+  }
+</style>
+<div id="activity">
+  <h3 id="recent-header">Recent Activities</h3>
+  <hr />
+  <div class="recent-activities">
+    {% for message in room_messages %}
+    <div class="activity-box">
+      <div>
+        <small
+          ><a href="{% url 'user-profile' message.user.id %}" id="user-name"
+            >@{{message.user}}</a
+          >{{message.created|timesince}} ago
+        </small>
+        <p>replied to "{{message.room}}"</p>
+        <p id="recent-msg">{{message}}</p>
+      </div>
+      {% if request.user == message.user %}
+      <div id="delete-div">
+        <a href="{% url 'delete-message' message.id %}" id="delete">Delete</a>
+      </div>
+      {% endif %}
+    </div>
+    <br />
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock content %}

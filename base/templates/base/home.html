@@ -1,0 +1,69 @@
+{% extends 'main.html' %} {% block content%}
+
+<style>
+  .home-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+  }
+  .room-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  body {
+    font-family: Arial, sans-serif;
+  }
+  #room-count {
+    background-color: rgba(128, 128, 128, 0.295);
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    margin: 0px;
+  }
+  #create-room {
+    background-color: rgba(9, 226, 9, 0.939);
+    color: black;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+  .main-page {
+    height: 550px;
+    overflow: scroll;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+  }
+
+  .feed-top {
+    border-radius: 10px;
+    padding: 5px;
+    margin: 5px;
+    background-color: #1a1a1d;
+    color: white;
+  }
+   
+</style>
+
+
+<div class="home-container">
+  <div class="browse-topic">{% include 'base/topics_component.html' %}</div>
+
+  <div class="main">
+    <div class="feed-top">
+      <h2>Study Room</h2>
+      <div class="room-header">
+        <p id="room-count">{{room_count}} rooms available</p>
+        <a href="{% url 'create-room' %}" id="create-room">Create Room</a>
+      </div>
+    </div>
+
+    <div class="main-page">{% include 'base/feed_component.html' %}</div>
+  </div>
+
+  <div>{% include 'base/activity_component.html' %}</div>
+</div>
+{% endblock content %}

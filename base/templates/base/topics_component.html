@@ -1,0 +1,87 @@
+{% block content %}
+
+<style>
+  .topic-name {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 19px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+    background-color: #6a1e55;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  #browse {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    text-align: center;
+    background-color: #1a1a1d;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  .all {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 19px;
+    padding: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .topic-container {
+    padding: 10px;
+  }
+  #topic {
+    color: white;
+
+    padding: 5px;
+    text-decoration: none;
+  }
+  #topic-count {
+    background-color: rgba(128, 128, 128, 0.451);
+    border: none;
+    border-radius: 2px;
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-top: 3px;
+    text-decoration: none;
+    color: white;
+  }
+  .all a {
+    text-decoration: none;
+    color: white;
+  }
+  .browse-topics {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+</style>
+
+<div class="browse-topics">
+  <h3 id="browse">Browse Topics</h3>
+  <hr />
+  <div class="all">
+    <a href="{% url 'home' %}">All </a
+    ><span id="topic-count">{{topics.count}}</span>
+  </div>
+  <div class="topic-container">
+    {% for topic in topics %}
+    <div class="topic-name">
+      <a href="{% url 'home' %}?q={{topic.name}}" id="topic">{{topic.name}} </a>
+      <span id="topic-count">{{topic.room_set.count}}</span>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock content %}

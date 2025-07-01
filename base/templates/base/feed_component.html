@@ -1,0 +1,78 @@
+{% block content %}
+<style>
+  .main-page {
+    border: none;
+
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .feed-content {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #6a1e55;
+    border: 1px solid black;
+    border-radius: 10px;
+    color: white;
+  }
+  .user-room-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  #username {
+    text-decoration: none;
+    color: white;
+  }
+  #room-topic {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    color: white;
+  }
+  #room-topic small {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.578);
+  }
+  #edit,
+  #delete {
+    text-decoration: none;
+    padding: 2px;
+    background-color: rgb(0, 208, 255);
+    color: rgb(0, 0, 0);
+    border-radius: 5px;
+    font-size: 15px;
+  }
+</style>
+
+{% for room in rooms %}
+<div class="feed-content">
+  <div class="user-room-header">
+    <div>
+      {% if room.host and room.host.id %}
+      <a href="{% url 'user-profile' room.host.id %}" id="username"
+        >@{{ room.host.username }}</a
+      >
+      {% else %}
+      <span>@Unknown Host</span>
+      {% endif %}
+    </div>
+    <div class="room-controls">
+      {% if request.user == room.host %}
+      <a href="{% url 'update-room' room.id %}" id="edit">Edit</a>
+      <a href="{% url 'delete-room' room.id %}" id="delete">Delete</a>
+      {% endif %}
+    </div>
+  </div>
+  <h2><a href="/room/{{room.id}}" id="username">{{room.name}}</a></h2>
+  <div id="room-topic">
+    <small>{{room.topic}}</small>
+  </div>
+</div>
+{% endfor %} {% endblock content %}

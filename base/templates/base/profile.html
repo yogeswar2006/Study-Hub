@@ -1,0 +1,99 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+
+<style>
+  .nav-section {
+    font-family: Arial, sans-serif;
+  }
+  .profile-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    max-height: 450px;
+    font-family: Arial, sans-serif;
+  }
+  .main-feed {
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 430px;
+    overflow: scroll;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+  }
+  #profile-img {
+    width: 140px;
+    border-radius: 50%;
+    display: block;
+    text-align: center;
+  }
+  .profile-img-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .profile-img-div h4 {
+    color: rgb(255, 255, 255);
+    margin: 5px;
+    font-size: 19px;
+  }
+  #user-study-room h3,
+  #user-study-room p {
+    color: white;
+    margin: 10px;
+  }
+  .recent-activity {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  #back-arrow {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+  }
+  #profile-back-section {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding: 5px;
+  }
+  #edit-profile-btn{
+    font-size: 19px;
+    text-decoration: none;
+    margin: 10px;
+    border-radius: 5px;
+    background-color: rgb(3, 240, 248);
+    padding: 5px;
+    color: black;
+  }
+</style>
+
+<div class="profile-container">
+  {% include 'base/topics_component.html' %}
+
+  <div class="profile-main">
+    <div>
+      <div class="profile-img-div">
+        <img src="{% static 'images/img.jpg' %}" alt="Image" id="profile-img" />
+        <h4>{{user.username}}</h4>
+       <a href="{% url 'update-user' user.id %}" id="edit-profile-btn"> <span >Edit Profile</span></a>
+      </div>
+      <div id="user-study-room">
+        <div id="profile-back-section">
+          <a href="{% url 'home' %}"
+            ><img src="{% static 'images/back-arrow2.jpg' %}" id="back-arrow"
+          /></a>
+          <h3>Study Room</h3>
+        </div>
+        <p>Hosted by "{{user.username}}"</p>
+      </div>
+    </div>
+    <div class="main-feed">{% include 'base/feed_component.html' %}</div>
+  </div>
+
+  <div class="recent-activity">
+    {% include 'base/activity_component.html' %}
+  </div>
+</div>
+
+{% endblock content %}

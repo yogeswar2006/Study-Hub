@@ -1,0 +1,48 @@
+{% extends 'main.html' %} {% block content %}
+<style>
+  .delete-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+
+    font-family: Arial, sans-serif;
+  }
+  .nav-section {
+    font-family: Arial, sans-serif;
+  }
+  #delete-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+  }
+  #delete-div {
+    color: white;
+    background-color: #1a1a1d;
+    border-radius: 10px;
+    padding: 20px;
+  }
+  #go-back {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    border-radius: 2px;
+    background-color: white;
+    padding: 2px;
+  }
+</style>
+
+<form method="POST" action="">
+  {% csrf_token %}
+  <div class="delete-form">
+    <div id="delete-div">
+      <p>Are you sure You want to delete "{{obj}}"?</p>
+      <div id="delete-section">
+        <a href="{{request.META.HTTP_REFERER}}" id="go-back">Go Back</a>
+        <input type="submit" value="Confirm" id="delete-btn" />
+      </div>
+    </div>
+  </div>
+</form>
+
+{% endblock content %}

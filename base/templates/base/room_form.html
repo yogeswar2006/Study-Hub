@@ -1,0 +1,116 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+<style>
+  .nav-section {
+    font-family: Arial, sans-serif;
+  }
+  .create-room-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: Arial, sans-serif;
+  }
+  #creating-room-page {
+    padding: 20px;
+    border-radius: 10px;
+  }
+  #creating-room {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 10px;
+
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #1a1a1d;
+  }
+  #creating-room h2 {
+    margin: 5px;
+  }
+  #topic-input,
+  #id_name {
+    width: 300px;
+    height: 25px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  #id_description {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  #submit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #submit-btn input {
+    padding: 3px 8px 3px 8px;
+    background-color: aliceblue;
+    border-radius: 5px;
+    border: none;
+    font-size: 19px;
+  }
+  #back-arrow {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+  }
+  #room-input-part {
+    padding: 20px;
+    background-color: #6a1e55;
+    border-radius: 10px;
+  }
+</style>
+
+<div>
+  <form method="POST" action="" class="create-room-form">
+    {% csrf_token %}
+    <div id="creating-room-page">
+      <div id="creating-room">
+        <a href="{% url 'home' %}"><img
+          src="{% static 'images/back-arrow2.jpg' %}"
+          alt="Arrow"
+          id="back-arrow"
+          href="{% url 'home' %}"
+        /></a>
+        <h2>Creating Room</h2>
+      </div>
+      <hr />
+      <div id="room-input-part">
+        <div>
+          <label for="room_topic">Topic:</label><br />
+          <input
+            required
+            type="text"
+            name="topic"
+            list="topic-list"
+            id="topic-input"
+          />
+          <datalist id="topic-list">
+            <select id="room-topics">
+              {% for topic in topics %}
+              <option value="{{topic.name}}">{{topic.name}}</option>
+              {% endfor %}
+            </select>
+          </datalist>
+        </div>
+
+        <div>
+          <label for="room_name">Name:</label><br />
+          {{form.name}}
+        </div>
+
+        <div>
+          <label for="room_description">Description:</label><br />
+          {{form.description}}
+        </div>
+
+        <div id="submit-btn">
+          <input type="submit" value="Create" />
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,97 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    .update-user-layout{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+       
+        color: white;
+
+    }
+    #back-arrow{
+       width: 30px;
+       height: 30px;
+       border-radius: 10px;
+    }
+    #update-user-header{
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        gap:30px;
+       
+
+    }
+    .update-user-form{
+         background-color: #1a1a1d;
+         padding: 20px;
+         border-radius: 10px;
+         font-family: Arial,  sans-serif;
+    }
+    #update-user-username input,#update-user-email input{
+         width: 300px;
+    height: 30px;
+    border-radius: 5px;
+    margin-top: 5px;
+    font-size: 19px;
+    }
+    #username-email{
+        font-size: 20px;
+        
+    }
+    #update-user-username ,#update-user-email{
+        margin-bottom: 20px;
+    }
+    #update-user-header h2{
+        margin: 10px;
+    }
+    #update-user-body{
+        margin-top: 30px;
+    }
+    #update-user-submit-btn{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 30px;
+    }
+    #update-user-submit-btn input{
+        font-size: 19px;
+        padding:5px;
+        border-radius: 5px;
+        background-color: rgb(3, 240, 248);
+
+    }
+</style>
+
+
+<div class="update-user-layout">
+
+    <form method="POST" action="" class="update-user-form">
+        {% csrf_token %}
+        <div id="update-user-header">
+            <a href="{% url 'user-profile' user.id %}">
+                <img src="{% static 'images/back-arrow2.jpg' %}" id="back-arrow"/>
+            </a>
+            <h2>Edit Profile</h2>
+            
+        </div>  
+        <hr>
+        <div id="update-user-body">
+            <div id="update-user-username">
+                <label id="username-email">Username:</label><br>
+                <input required type="text" name="username" value="{{user.username}}" />
+            </div>    
+            <div id="update-user-email">
+                <label id="username-email">Email:</label><br>
+                <input required type="email" name="email" value="{{user.email}}" />
+            </div>
+            <div id="update-user-submit-btn">
+                <input type="submit" value="Update" />
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}

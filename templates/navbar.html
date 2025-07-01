@@ -1,0 +1,97 @@
+{% load static %}
+<style>
+  .nav-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #1a1a1d;
+
+    color: white;
+    margin-bottom: 10px;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 5px;
+  }
+  #search-rooms {
+    padding: 10px 20px 10px 20px;
+    border-radius: 5px;
+    width: 300px;
+  }
+  #input-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #user-name {
+    text-align: center;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #logout-login {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: red;
+    color: black;
+    text-decoration: none;
+    max-width: 100px;
+  }
+
+  .logout-login-button {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+  }
+  #study-hub {
+    color: white;
+    text-decoration: none;
+  }
+  #logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  .logo-section {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
+
+<div class="nav-section">
+  <div class="logo-section">
+    <img src="{% static 'images/studyhub-logo.png' %}" alt="logo" id="logo" />
+    <a href="/" id="study-hub"><h1>Study Hub</h1></a>
+  </div>
+  <form method="GET" action="{% url 'home' %}" id="input-form">
+    <input
+      type="text"
+      name="q"
+      placeholder="Search-Rooms..."
+      id="search-rooms"
+    />
+  </form>
+
+  {% if request.user.is_authenticated %}
+  <p id="user-name">Hello {{request.user}}</p>
+  <div class="logout-login-button">
+    <a href="{% url 'logout' %}" id="logout-login">Logout</a>
+  </div>
+
+  {% else %}
+  <div class="logout-login-button">
+    <a href="{% url 'login' %}" id="logout-login">Login</a>
+  </div>
+
+  {% endif %}
+</div>
