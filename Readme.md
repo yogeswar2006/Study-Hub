@@ -61,15 +61,15 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-🛡️ Permissions
-  .🧑 Guests:
+🛡️ Permissions<br>
+  .🧑 Guests:<br>
        => View topics, rooms, and messages
-  .✅ Logged-in Users:
+  .✅ Logged-in Users:<br>
        => Create rooms, post messages
        => Edit their own rooms
        => Delete their own messages
 
-📌 Tech Stack
+📌 Tech Stack<br>
   => Backend: Django 5+, Django REST Framework
 
   => Frontend: HTML, CSS, JS 
@@ -82,8 +82,8 @@ python manage.py runserver
 This project is licensed under the MIT License.
 
 📬 Contact
-Built with ❤️ by [Yogeswar Reddy]
-📧 Email: yogi8247322760@gmail.com
+Built with ❤️ by [Yogeswar Reddy]<br>
+📧 Email: yogi8247322760@gmail.com <br>
 🔗 GitHub : @https://github.com/yogeswar2006
 
 
